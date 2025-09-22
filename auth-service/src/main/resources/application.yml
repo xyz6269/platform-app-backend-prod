@@ -1,0 +1,73 @@
+server:
+  port: 8081
+
+spring:
+  threads:
+    virtual:
+      enabled: true
+  application:
+    name: auth-service
+  datasource:
+    url: jdbc:postgresql://host.docker.internal:5432/users_db
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  cloud:
+    consul:
+      host: host.docker.internal
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        instance-id: auth-service-${spring.application.instance-id:${random.value}}
+        prefer-ip-address: true
+        health-check-path: /actuator/health
+        health-check-interval: 15s
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${CLUB_EMAIL}
+    password: ${CLUB_EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            required: true
+            enable: true
+          timeout: 20000
+          connectiontimeout: 20000
+          writetimeout: 20000
+  data:
+    redis:
+      host: host.docker.internal
+      port: 6379
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+    endpoint:
+      health:
+        show-details: always
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 86400000
+
+link:
+  whatsapp: ${INVITE_LINK}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
