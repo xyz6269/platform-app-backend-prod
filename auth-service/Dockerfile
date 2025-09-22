@@ -13,8 +13,7 @@ COPY . .
 # Build the Spring Boot application, creating the executable JAR
 RUN gradle bootJar --no-daemon -x test
 
---------------------------------------------------------------------------------------------------------------------------
-
+#-----------------------------------------------------------------------------------------------------------------------
 # Stage 2: Create the final, lightweight image
 FROM openjdk:21-jdk-slim
 WORKDIR /app
