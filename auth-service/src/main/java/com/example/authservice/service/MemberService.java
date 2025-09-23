@@ -58,7 +58,7 @@ public class MemberService {
             return new LoginResponse(jwtToken);
         } catch (BadCredentialsException e) {
             log.warn("user : {}, entered bad credentials : {}",dto.email() ,e.getMessage());
-            throw e;
+            throw new BadCredentialsException("Invalid Credentials");
         }
     }
 
