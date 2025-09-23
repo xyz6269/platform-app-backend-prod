@@ -48,8 +48,8 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers( "/actuator/health"
-                                        , "/api/v1/auth/signup"
-                                        , "/api/v1/auth/signin"
+                                        , "/api/v1/auth/authenticate"
+                                        , "/api/v1/auth/register"
                                         , "/api/v1/auth/health"
                                         , "/v2/api-docs"
                                         , "/v3/api-docs/**"
