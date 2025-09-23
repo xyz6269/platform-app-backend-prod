@@ -17,12 +17,12 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/signin")
+    @PostMapping("/authenticate")
     public ResponseEntity<LoginResponse> signIn(@Valid @RequestBody LoginDTO request) {
         return ResponseEntity.ok(memberService.authenticateUser(request));
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> signUp(@Valid @RequestBody SignUpDTO request) {
         return ResponseEntity.ok(memberService.registerUser(request));
@@ -34,12 +34,12 @@ public class MemberController {
     public ResponseEntity<String> activateAccount(@PathVariable Long id) {
         return ResponseEntity.ok("user : " + memberService.activateUserAccount(id) + " account's has been activated");
     }
-
-    @GetMapping("/me")
-    @SecurityRequirement(name = "bearerAuth")
-    public ResponseEntity<String> currentAdmin() {
-        return ResponseEntity.ok(memberService.getCurrentUser());
-    }
+//
+//    @GetMapping("/me")
+//    @SecurityRequirement(name = "bearerAuth")
+//    public ResponseEntity<String> currentAdmin() {
+//        return ResponseEntity.ok(memberService.getCurrentUser());
+//    }
 
     @PostMapping("/health")
     public ResponseEntity<String> healthCheck() {
