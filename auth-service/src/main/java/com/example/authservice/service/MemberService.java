@@ -8,7 +8,6 @@ import com.example.authservice.DTO.SignUpDTO;
 import com.example.authservice.config.RedisPublisher;
 import com.example.authservice.entity.Member;
 import com.example.authservice.enums.*;
-import com.example.authservice.exceptions.IncorrectCredentialsException;
 import com.example.authservice.exceptions.InvalidPhoneNumber;
 import com.example.authservice.exceptions.UserNotFoundException;
 import com.example.authservice.mail.EmailTemplateService;
@@ -59,7 +58,7 @@ public class MemberService {
             return new LoginResponse(jwtToken);
         } catch (BadCredentialsException e) {
             log.warn("user : {}, entered bad credentials : {}",dto.email() ,e.getMessage());
-            throw new IncorrectCredentialsException("Invalid Credentials");
+            throw new BadCredentialsException("Invalid Credentials");
         }
     }
 

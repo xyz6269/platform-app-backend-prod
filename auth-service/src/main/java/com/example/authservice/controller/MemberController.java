@@ -34,12 +34,6 @@ public class MemberController {
     public ResponseEntity<String> activateAccount(@PathVariable Long id) {
         return ResponseEntity.ok("user : " + memberService.activateUserAccount(id) + " account's has been activated");
     }
-//
-//    @GetMapping("/me")
-//    @SecurityRequirement(name = "bearerAuth")
-//    public ResponseEntity<String> currentAdmin() {
-//        return ResponseEntity.ok(memberService.getCurrentUser());
-//    }
 
     @PostMapping("/health")
     public ResponseEntity<String> healthCheck() {
